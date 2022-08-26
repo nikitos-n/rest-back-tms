@@ -15,4 +15,4 @@
 - POST http://hostname/api/pets CREATE NEW PET (use db) ->
 - PUT http://hostname/api/pets/{id} UPDATE PET (use db) ->
 - DELETE http://hostname/api/pets/{id} DELETE PET (use db) ->
-- POST http://hostname/api/users/{id}/pets/photo UPLOAD PET PHOTO -> 
+- POST http://hostname/api/users/{id}/pets/photo UPLOAD PET PHOTO ->
