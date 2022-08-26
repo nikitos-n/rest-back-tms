@@ -1,14 +1,6 @@
 version: '3.3'
 
 services:
-  nginx-proxy-server:
-    build: 
-      context: .
-      dockerfile: ./docker/nginx/Dockerfile
-    depends_on:
-      - tms_rest_server
-    ports:
-      - 80:80
   postgres_db:
     image: postgres:14.4-alpine
     restart: unless-stopped
@@ -17,7 +9,23 @@ services:
       - ./storage-data:/var/lib/postgresql/data
     ports:
       - 5432:${POSTGRES_PORT}
+
+  redis_cache_server:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - 6379:${REDIS_PORT}
   
+  nginx-proxy-server:
+    build: 
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    depends_on:
+      - tms_rest_server
+    volumes:
+      - ./uploads:/app/static/uploads
+    ports:
+      - 80:80
   tms_rest_server:
     build:
       context: .
@@ -30,6 +38,7 @@ services:
     env_file: .env
     environment:
       - POSTGRES_HOST=postgres_db
+      - REDIS_HOST=redis_cache_server
     volumes:
       - ./:/app
     ports:

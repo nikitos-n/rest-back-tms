@@ -1,6 +1,5 @@
 const HttpError = require('../utils/requestResponseErrors')
-const { Users } = require('./db/models')
-
+const { Users, Pets } = require('./db/models')
 
 const getUsersList = async (searchParams) => {
   try {
@@ -15,12 +14,20 @@ const getUsersList = async (searchParams) => {
     let users
     if (offset && limit) {
       users = await Users.findAll({ 
+        include: {
+          model: Pets,
+          attributes: ['photo']
+        },
         attributes: ['id', 'userName', 'email', 'photo'],
         offset, 
         limit 
       })
     } else {
       users = await Users.findAll({
+        include: {
+          model: Pets,
+          attributes: ['id', 'petName', 'age']
+        },
         attributes: ['id', 'userName', 'email', 'photo']
       })
     }
@@ -36,6 +43,10 @@ const getUserData = async (userId) => {
   try {
     const user = await Users.findAll({
       where: { id: userId },
+      include: {
+        model: Pets,
+        attributes: ['id', 'petName', 'age']
+      },
       attributes: ['id', 'userName', 'email', 'photo']
     })
 

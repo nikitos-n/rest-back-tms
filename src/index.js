@@ -11,6 +11,7 @@ const petsRouter = require('./routes/pets')
 const errorHandler = require('./middlewares/errorHandler')
 
 const { sequelize } = require('./services/db/models')
+const getCacheClient = require('./services/cache')
 
 const { APP_PORT: PORT } = process.env
 
@@ -23,6 +24,11 @@ const swaggerDocument = yaml.load(swaggerPath)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+
+app.use(async (req, res, next) => {
+  req.cacheClient = await getCacheClient()
+  next()
+})
 
 app.use('/api', authRouter)
 app.use('/api', usersRouter)

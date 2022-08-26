@@ -1,5 +1,6 @@
 const authService = require('../services/auth')
 const usersService = require('../services/users')
+const getCacheKey = require('../utils/getCacheKey')
 
 const authRegister = async (req, res, next) => {
   try {
@@ -28,7 +29,20 @@ const authLogin = async (req, res, next) => {
   }
 }
 
+const authLogout = async (req, res, next) => {
+  try {
+    const { token, tokenCacheKey } = req
+    await req.cacheClient.set(tokenCacheKey, token, { EX: 300 })
+    console.log('test')
+    res.sendStatus(200)
+  } catch (err) {
+    console.log(`authController.authLogout error: ${err}`)
+    return next(err)
+  }
+}
+
 module.exports = {
   authRegister,
-  authLogin
+  authLogin,
+  authLogout
 }

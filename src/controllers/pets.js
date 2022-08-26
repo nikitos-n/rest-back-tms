@@ -1,10 +1,21 @@
 const petsService = require('../services/pets')
 const filesService = require('../services/files')
+const getCacheKey = require('../utils/getCacheKey')
 
 const getPets = async (req, res, next) => {
   try {
     const { offset, limit } = req.query
-    const pets = await petsService.getPetsList({ offset, limit })
+    const cacheKey = getCacheKey('getPets', { offset, limit })
+    const cachedData = await req.cacheClient.get(cacheKey)
+    let pets = []
+    if (!cachedData) {
+      pets = await petsService.getPetsList({ offset, limit })
+      await req.cacheClient.set(cacheKey, JSON.stringify(pets), { EX: 60 })
+      res.set('X-DATA-SOURCE', 'DATABASE')
+    } else {
+      pets = JSON.parse(cachedData)
+      res.set('X-DATA-SOURCE', 'CACHE')
+    }
     res.status(200).send(pets)
   } catch (err) {
     console.log(`petsController.getPets err: ${err}`)
@@ -52,7 +63,7 @@ const uploadPetPhoto = async (req, res, next) => {
     const { petId } = req.params
     await petsService.checkExistsPet({ id: petId })
     const filePath = await filesService.uploadFile(req)
-    await petsService.updatePet(petId, { photo: filePath })
+    await petsService.uploadPhoto(petId, { photo: filePath })
     res.status(200).send({ filePath })
   } catch (err) {
     console.log(`usersController.uploadUserPhoto err: ${err}`)

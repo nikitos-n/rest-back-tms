@@ -1,10 +1,21 @@
 const usersService = require('../services/users')
 const filesService = require('../services/files')
+const getCacheKey = require('../utils/getCacheKey')
 
 const getUsers = async (req, res, next) => {
   try {
     const { offset, limit } = req.query
-    const users = await usersService.getUsersList({ offset, limit })
+    const cacheKey = getCacheKey('getUsers', { offset, limit })
+    const cachedData = await req.cacheClient.get(cacheKey)
+    let users = []
+    if (!cachedData) {
+      users = await usersService.getUsersList({ offset, limit })
+      await req.cacheClient.set(cacheKey, JSON.stringify(users), { EX: 60 })
+      res.set('X-DATA-SOURCE', 'DATABASE')
+    } else {
+      users = JSON.parse(cachedData)
+      res.set('X-DATA-SOURCE', 'CACHE')
+    }
     res.status(200).send(users)
   } catch (err) {
     console.log(`usersController.getUsers err: ${err}`)

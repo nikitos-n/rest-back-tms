@@ -15,5 +15,6 @@ router
   .put('/pets/:petId', checkAuth, petsValidator.petCreateUpdate, petsController.updatePetById)
 
   .delete('/pets/:petId', checkAuth, petsController.deletePetById)
+  // .delete('/pets/:petId/upload/photo/:photoId', checkAuth, petsController.uploadPetPhoto)
 
 module.exports = router

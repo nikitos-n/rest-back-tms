@@ -1,6 +1,7 @@
 # REST Auth
 - POST http://hostname/api/auth/register REGISTER NEW USER (use db) -> 
-- POST http://hostname/api/auth/login LOGIN USER (use db) -> 
+- POST http://hostname/api/auth/login LOGIN USER (use db) ->
+- POST http://hostname/api/auth/logout LOGOUT USER -> 
 
 # REST Users
 - GET http://hostname/api/users GET ALL USERS (use db) ->

@@ -1,5 +1,5 @@
 const HttpError = require('../utils/requestResponseErrors')
-const { Users, Pets } = require('./db/models')
+const { Users, Pets, PetPhotos } = require('./db/models')
 
 const getPetsList = async (searchParams) => {
   try {
@@ -14,13 +14,21 @@ const getPetsList = async (searchParams) => {
     let pets
     if (offset && limit) {
       pets = await Pets.findAll({ 
-        attributes: ['id', 'petName', 'age', 'photo'],
+        include: {
+          model: PetPhotos,
+          attributes: ['id', 'photo']
+        },
+        attributes: ['id', 'petName', 'age'],
         offset, 
         limit 
       })
     } else {
       pets = await Pets.findAll({
-        attributes: ['id', 'petName', 'age', 'photo'],
+        include: {
+          model: PetPhotos,
+          attributes: ['id', 'photo']
+        },
+        attributes: ['id', 'petName', 'age'],
       })
     }
 
@@ -35,7 +43,11 @@ const getPetData = async (petId) => {
   try {
     const pet = await Pets.findAll({
       where: { id: petId },
-      attributes: ['id', 'petName', 'age', 'photo'],
+      include: {
+        model: PetPhotos,
+        attributes: ['id', 'photo']
+      },
+      attributes: ['id', 'petName', 'age'],
     })
 
     if (!pet[0]) {
@@ -53,7 +65,7 @@ const checkExistsPet = async (petData) => {
   try {
     const findPetResult = await Pets.findOne({
       where: { ...petData },
-      attributes: ['id', 'petName', 'age', 'photo']
+      attributes: ['id', 'petName', 'age']
     })
     if (!findPetResult) {
       console.log('petsService.checkExistsPet err')
@@ -71,11 +83,10 @@ const createNewPet = async (userData, catData) => {
 
     const user = await Users.findOne({
       where: {
-        id: userId
+        id: userId,
       }
     })
-
-    const pet = await Pets.create(catData) 
+    const pet = await Pets.create(catData)
     await user.addPet(pet)
     await user.save()
 
@@ -92,7 +103,7 @@ const updatePet = async (petId, updateData) => {
     const updateResult = await Pets.update({ ...updateData }, {
       where: { id: petId },
       returning: true,
-      attributes: ['id', 'petName', 'age', 'photo']
+      attributes: ['id', 'petName', 'age']
     })
 
     if (!updateResult[0]) {
@@ -100,11 +111,29 @@ const updatePet = async (petId, updateData) => {
       throw new HttpError({ statusCode: 404, message: 'Pet not found' })
     }
 
-    const { id, petName, age, photo } = updateResult[1][0].dataValues
-    const updatedPet = { id, petName, age, photo }
+    const { id, petName, age } = updateResult[1][0].dataValues
+    const updatedPet = { id, petName, age }
     return updatedPet
   } catch (err) {
     console.log(`usersService.updateUser err: ${err}`)
+    throw err
+  }
+}
+
+const uploadPhoto = async (petId, photoData) => {
+  try {
+    const pet = await Pets.findOne({
+      where: {
+        id: petId,
+      }
+    })
+    const petPhoto = await PetPhotos.create(photoData)
+    await pet.addPetPhoto(petPhoto)
+    await pet.save()
+
+    return { photoData }
+  } catch (err) {
+    console.log(`usersService.uploadPhoto err: ${err}`)
     throw err
   }
 }
@@ -136,5 +165,6 @@ module.exports = {
   checkExistsPet,
   createNewPet,
   updatePet,
+  uploadPhoto,
   deletePet
 }
