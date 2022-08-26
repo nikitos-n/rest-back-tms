@@ -1,45 +1,76 @@
 version: '3.3'
 
+
+volumes:
+  storage_data:
+  message_broker_data:
+
 services:
   postgres_db:
     image: postgres:14.4-alpine
     restart: unless-stopped
-    env_file: .env
+    env_file: ./microservices/storage/.env
     volumes:
-      - ./storage-data:/var/lib/postgresql/data
+      - storage_data:/var/lib/postgresql/data
     ports:
       - 5432:${POSTGRES_PORT}
+
+  message_broker:
+    image: rabbitmq:3.10-management-alpine
+    restart: unless-stopped
+    volumes:
+      - message_broker_data:/var/lib/rabbitmq
+    ports:
+      - 15672:15672
 
   redis_cache_server:
     image: redis:7-alpine
     restart: unless-stopped
-    ports:
-      - 6379:${REDIS_PORT}
   
   nginx-proxy-server:
     build: 
       context: .
       dockerfile: ./docker/nginx/Dockerfile
     depends_on:
-      - tms_rest_server
+      - gateway_node_service
     volumes:
       - ./uploads:/app/static/uploads
     ports:
       - 80:80
-  tms_rest_server:
+
+  gateway_node_service:
     build:
-      context: .
+      context: ./microservices/gateway
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    env_file: ./microservices/gateway/.env
+    volumes:
+      - ./microservices/gateway/:/app
+    ports:
+      - 3000:${APP_PORT}
+
+  storage_node_service:
+    build:
+      context: ./microservices/storage
       dockerfile: Dockerfile
     depends_on:
       - postgres_db
     restart: unless-stopped
     stdin_open: true
     tty: true
-    env_file: .env
-    environment:
-      - POSTGRES_HOST=postgres_db
-      - REDIS_HOST=redis_cache_server
+    env_file: ./microservices/storage/.env
     volumes:
-      - ./:/app
-    ports:
-      - 3000:${APP_PORT}
+      - ./microservices/storage/:/app
+
+  files_node_service:
+    build:
+      context: ./microservices/files
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    env_file: ./microservices/files/.env
+    volumes:
+      - ./microservices/files/:/app
