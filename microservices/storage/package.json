@@ -1,0 +1,40 @@
+{
+  "name": "rest-back-tms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js",
+    "db:migrate": "npx sequelize-cli db:migrate",
+    "db:migrate:undo:all": "npx sequelize-cli db:migrate:undo:all",
+    "db:migrate:undo:one": "npx sequelize-cli db:migrate:undo",
+    "db:seed:all": "npx sequelize-cli db:seed:all",
+    "db:seed:undo:all": "npx sequelize-cli db:seed:undo:all",
+    "db:seed:undo:one": "npx sequelize-cli db:seed:undo",
+    "test": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^7.4.0",
+    "@types/node": "^16.11.47",
+    "@types/sequelize": "^4.28.14",
+    "nodemon": "^2.0.19",
+    "sequelize-cli": "^6.4.1"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "formidable": "^2.0.1",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.3",
+    "redis": "^4.3.0",
+    "sequelize": "^6.21.3",
+    "swagger-ui-express": "^4.5.0",
+    "yamljs": "^0.3.0"
+  }
+}
