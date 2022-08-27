@@ -16,7 +16,7 @@ const getUsersList = async (searchParams) => {
       users = await Users.findAll({ 
         include: {
           model: Pets,
-          attributes: ['photo']
+          attributes: ['id', 'petName', 'age']
         },
         attributes: ['id', 'userName', 'email', 'photo'],
         offset, 

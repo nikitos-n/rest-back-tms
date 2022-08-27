@@ -3,11 +3,11 @@ const authService = require('../services/auth')
 const getCacheKey = require('../utils/getCacheKey')
 
 const checkAuth = async (req, res, next) => {
-  const { authorization } = req.headers
-  if (!authorization) {
-    throw new HttpError({ statusCode: 401, message: 'Unauthorized' })
-  }
   try {
+    const { authorization } = req.headers
+    if (!authorization) {
+      throw new HttpError({ statusCode: 401, message: 'Unauthorized' })
+    }
     const [_, token] = authorization.split(' ')
 
     const cacheKey = getCacheKey('authLogoutList', { token })

@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node ./src/index.js",
     "dev": "nodemon ./src/index.js",
+    "docker:up": "docker-compose up",
+    "docker:down": "docker-compose down",
     "db:migrate": "npx sequelize-cli db:migrate",
     "db:migrate:undo:all": "npx sequelize-cli db:migrate:undo:all",
     "db:migrate:undo:one": "npx sequelize-cli db:migrate:undo",

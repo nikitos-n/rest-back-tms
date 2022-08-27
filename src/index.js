@@ -21,7 +21,7 @@ const server = http.createServer(app)
 const swaggerPath = path.resolve(__dirname, '../swagger.yml')
 const swaggerDocument = yaml.load(swaggerPath)
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 

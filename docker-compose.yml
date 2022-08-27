@@ -1,20 +1,21 @@
 version: '3.3'
 
+volumes:
+  storage-data:
+
 services:
   postgres_db:
     image: postgres:14.4-alpine
     restart: unless-stopped
     env_file: .env
     volumes:
-      - ./storage-data:/var/lib/postgresql/data
+      - storage-data:/var/lib/postgresql/data
     ports:
       - 5432:${POSTGRES_PORT}
 
   redis_cache_server:
     image: redis:7-alpine
     restart: unless-stopped
-    ports:
-      - 6379:${REDIS_PORT}
   
   nginx-proxy-server:
     build: 
