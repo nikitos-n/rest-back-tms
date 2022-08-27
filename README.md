@@ -5,6 +5,7 @@
 # Stack 
 - nginx
 - postgresql
+- sequelize
 - node.js (express.js)
 - redis 
 
