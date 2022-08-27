@@ -1,0 +1,670 @@
+{
+	"info": {
+		"_postman_id": "339c8a44-4e88-4839-9a28-8ce1ffbb0539",
+		"name": "node_course",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "tms_rest_back",
+			"item": [
+				{
+					"name": "pets",
+					"item": [
+						{
+							"name": "GET /api/pets",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1/api/pets?limit=1&offset=8",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"path": [
+										"api",
+										"pets"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "1"
+										},
+										{
+											"key": "offset",
+											"value": "8"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET /api/pets/:petId",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/pets/11",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"pets",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE api/pets/:petId",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlck5hbWUiOiJUZXN0IE5hbWUiLCJlbWFpbCI6InRlc3RfdXNlckBtYWlsLmNvbSIsImlhdCI6MTY2MTUyMDUzMCwiZXhwIjoxNjYxNTIwODMwfQ.3V4g76iAnow_6bdPdruPvHrBH70h9qyEskBO0YB2wl0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/pets/3",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"pets",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST /api/pets",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlck5hbWUiOiJUZXN0IE5hbWUiLCJlbWFpbCI6InRlc3RfdXNlckBtYWlsLmNvbSIsImlhdCI6MTY2MTUyMDIyNCwiZXhwIjoxNjYxNTIwNTI0fQ.6H8bvk3mvI3nm85__Y9QEz9KoOoCwomaMCMMfJlDWbI",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"petName\": \"Мурзик\",\r\n    \"age\": 30\r\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/pets",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"pets"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT /api/pets/:petId",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlck5hbWUiOiJUZXN0IE5hbWUiLCJlbWFpbCI6InRlc3RfdXNlckBtYWlsLmNvbSIsImlhdCI6MTY2MTUyMDIyNCwiZXhwIjoxNjYxNTIwNTI0fQ.6H8bvk3mvI3nm85__Y9QEz9KoOoCwomaMCMMfJlDWbI",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"petName\": \"Murzik\",\r\n    \"age\": 20\r\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/pets/11",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"pets",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST /api/pets/:petId/upload/photo",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlck5hbWUiOiJUZXN0IE5hbWUiLCJlbWFpbCI6InRlc3RfdXNlckBtYWlsLmNvbSIsImlhdCI6MTY2MTUyODQyNiwiZXhwIjoxNjYxNTI4NzI2fQ.1hTdkEs2wKXGozl5w-nYVr1hFz7HUuRKaPu7zRBPEls",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/home/pingvin/work/ND-01/fs-os-args/node-js-course-4/task-1/images/cat-3.jpg"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/pets/11/upload/photo",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"pets",
+										"11",
+										"upload",
+										"photo"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "GET /api/users",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlck5hbWUiOiJUZXN0IE5hbWUiLCJlbWFpbCI6InRlc3RfdXNlckBtYWlsLmNvbSIsImlhdCI6MTY2MTUyODA5NSwiZXhwIjoxNjYxNTI4Mzk1fQ.ISZPma5uoVf_epO3BnvFrUpa8EHGvTYLvJA1c1PUM5w",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1/api/users",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT /api/users/:userId",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlck5hbWUiOiJUZXN0IE5hbWUiLCJlbWFpbCI6InRlc3RfdXNlckBtYWlsLmNvbSIsImlhdCI6MTY2MTUxODY5OCwiZXhwIjoxNjYxNTE4OTk4fQ.Iuc6vInZyVhWMN7DsHxGJGQcMLuBnk2T6rdGiyA0sNU",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userName\": \"Test User\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/users/6",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET /api/users/:userId",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlck5hbWUiOiJUZXN0IE5hbWUiLCJlbWFpbCI6InRlc3RfdXNlckBtYWlsLmNvbSIsImlhdCI6MTY2MTUyNDY0MCwiZXhwIjoxNjYxNTI0OTQwfQ.cTEQ00PgG21gtmz3Rs0SjvsTJJoUiKe_gpZeJLIhQnk",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/users/3",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE /api/users/:userId",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlck5hbWUiOiJUZXN0IE5hbWUiLCJlbWFpbCI6InRlc3RfdXNlckBtYWlsLmNvbSIsImlhdCI6MTY2MTUxODY5OCwiZXhwIjoxNjYxNTE4OTk4fQ.Iuc6vInZyVhWMN7DsHxGJGQcMLuBnk2T6rdGiyA0sNU",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/users/3",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST /api/users/:userId/upload/photo",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlck5hbWUiOiJUZXN0IFVzZXIiLCJlbWFpbCI6InRlc3RfdXNlckBtYWlsLmNvbSIsImlhdCI6MTY2MTQyNDQ0OCwiZXhwIjoxNjYxNDI0NzQ4fQ.3cPzxRVxXENKXGt534AFk1ckWiDdAdvWzAvWz3kba90",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/home/pingvin/work/ND-01/fs-os-args/node-js-course-4/task-1/images/cat-2.jpg"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/users/6/upload/photo",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"6",
+										"upload",
+										"photo"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "POST api/auth/register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userName\": \"Test Name\",\n    \"email\": \"test_user@mail.com\",\n    \"password\": \"test123\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST api/auth/login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test_user@mail.com\",\n    \"password\": \"test123\"\n}"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST /api/auth/logut",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/auth/logout",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "test",
+			"item": [
+				{
+					"name": "POST users/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@mail.ru\",\n    \"password\": \"test\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST users/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@mail.ru\",\n    \"password\": \"test\",\n    \"name\": \"name\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAbWFpbC5ydSIsImlhdCI6MTY1NTE0ODI0LjcyMjZ9.CdV_MBnbmgkxuY0Ye95EVxmLCTkZhys6KiBe-LS8QZU",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/users/info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"info"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
